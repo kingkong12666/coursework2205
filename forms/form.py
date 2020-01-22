@@ -4,8 +4,8 @@ from wtforms import validators
 
 def validStr(form, field):
     for i in field.data:
-        if i.lower() not in list('qwertyuioplkjhgfdsazxcvbnm '):
-            raise ValidationError('Enter symbol!')
+        if i.lower() not in list('-qwertyuioplkjhgfdsazxcvbnm '):
+            raise ValidationError('Enter only letter!')
 
 def validInt(form, field):
     for i in field.data:
@@ -30,14 +30,11 @@ class StudentValidForm(Form):
         validators.DataRequired("Please enter student surname."),
         validators.Length(1, 50, "Student surname should be from 1 to 50 symbols")])
 
-    student_groupe = StringField("Student group: ", [
-        validators.DataRequired("Please enter student group."),
-        validators.Length(5, 10, "Student group should be from 1 to 10 symbols")])
 
-    student_faculty = StringField("Student faculty: ", [
-        validStr,
-        validators.DataRequired("Please enter student faculty."),
-        validators.Length(3, 50, "Student faculty should be from 3 to 50 symbols")])
+    student_time_work = StringField("Work time: ", [
+        validInt,
+        validators.DataRequired("Please enter work time."),
+        ])
 
     submit = SubmitField("Save")
 
